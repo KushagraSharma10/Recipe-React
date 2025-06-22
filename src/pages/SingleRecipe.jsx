@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useContext } from "react";
+import { useParams } from "react-router-dom";
+import { recipeContext } from "../context/RecipeContext";
 
 const SingleRecipe = () => {
-  return (
-    <div>SingleRecipe</div>
-  )
-}
+  const { data } = useContext(recipeContext);
+  const params = useParams();
 
-export default SingleRecipe
+  const recipe = data.find((recipe) => params.id === recipe.id);
+  console.log(recipe);
+  return recipe ? <div>SingleRecipe</div> : "Loading...";
+};
+
+export default SingleRecipe;
