@@ -5,9 +5,15 @@ import RecipeCard from "../components/RecipeCard";
 const Recipes = () => {
   const { data } = useContext(recipeContext);
 
-  const renderRecipes = data.map((recipe) => <RecipeCard key={recipe.id} recipe={recipe} />);
+  const renderRecipes = data.map((recipe) => (
+    <RecipeCard key={recipe.id} recipe={recipe} />
+  ));
 
-  return <div>{renderRecipes}</div>;
-}; 
+  return (
+    <div className="flex flex-wrap">
+      {data.length > 0 ? renderRecipes : "No Recipe Found!"}
+    </div>
+  );
+};
 
 export default Recipes;
