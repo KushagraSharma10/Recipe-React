@@ -35,39 +35,40 @@ const Create = () => {
 
       <input
         type="text"
-        {...register("Chef")}
+        {...register("chef")}
         className="block border-b outline-0 p-2"
         placeholder="Chef Name"
       />
 
       <textarea
         type="text"
-        {...register("description")}
+        {...register("desc")}
         className="block border-b outline-0 p-2 resize-none"
         placeholder="Start from here"
       />
 
       <textarea
         type="text"
-        {...register("ingredients")}
+        {...register("ingr")}
         className="block border-b outline-0 p-2 resize-none"
         placeholder="write ingredients seperated by comma"
       />
 
       <textarea
         type="text"
-        {...register("instructions")}
+        {...register("inst")}
         className="block border-b outline-0 p-2 resize-none"
         placeholder="write instructions seperated by comma"
       />
 
       <select
         {...register("Category")}
-        className="block border-b outline-0 p-2"
+        className="block border-b outline-0 p-2 text-zinc-500"
       >
-        <option value="cat-1">Category 1</option>
-        <option value="cat-2">Category 2</option>
-        <option value="cat-3">Category 3</option>
+        <option value="breakfast">Breakfast</option>
+        <option value="lunch">Lunch</option>
+        <option value="supper">Supper</option>
+        <option value="dinner">Dinner</option>
       </select>
 
       <button className="block mt-5 px-4 py-2 bg-zinc-900 rounded-md cursor-pointer">
