@@ -13,7 +13,6 @@ const RecipeContext = (props) => {
     },
   ]);
 
-  console.log(data);
 
   return (
     <recipeContext.Provider value={{ data, setData }}>
