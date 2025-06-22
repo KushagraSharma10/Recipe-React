@@ -1,15 +1,22 @@
 import { nanoid } from "nanoid";
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { recipeContext } from "../context/RecipeContext";
 
 const Create = () => {
+  const { data, setData } = useContext(recipeContext);
+
   const { register, handleSubmit, reset } = useForm();
 
-  const submitHandler = (data) =>{
-    data.id = nanoid()
-    console.log(data)
-  }
-  
+  const submitHandler = (recipe) => {
+    recipe.id = nanoid();
+    console.log(recipe);
+
+    setData([...data, recipe]);
+
+    reset();
+  };
+
   return (
     <form onSubmit={handleSubmit(submitHandler)}>
       <input
@@ -24,6 +31,13 @@ const Create = () => {
         {...register("title")}
         className="block border-b outline-0 p-2"
         placeholder="Recipe Title"
+      />
+
+      <input
+        type="text"
+        {...register("Chef")}
+        className="block border-b outline-0 p-2"
+        placeholder="Chef Name"
       />
 
       <textarea
@@ -50,7 +64,6 @@ const Create = () => {
       <select
         {...register("Category")}
         className="block border-b outline-0 p-2"
-        
       >
         <option value="cat-1">Category 1</option>
         <option value="cat-2">Category 2</option>
