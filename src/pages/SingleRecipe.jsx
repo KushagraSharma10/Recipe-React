@@ -11,11 +11,11 @@ const SingleRecipe = () => {
 
   const { register, handleSubmit } = useForm({
     defaultValues: {
-      title: recipe.title,
-      chef: recipe.chef,
-      category: recipe.Category,
-      image: recipe.image,
-      desc: recipe.desc,
+      title: recipe?.title,
+      chef: recipe?.chef,
+      category: recipe?.Category,
+      image: recipe?.image,
+      desc: recipe?.desc,
     },
   });
   const navigate = useNavigate();
@@ -25,12 +25,14 @@ const SingleRecipe = () => {
     const copyData = [...data];
     copyData[index] = { ...copyData[index], ...recipe };
     setData(copyData);
+    localStorage.setItem("recipes", JSON.stringify(copyData))
     toast.success("Recipe Updated!");
   };
 
   const deleteHandler = () => {
     const filteredData = data.filter((r) => r.id !== params.id);
     setData(filteredData);
+    localStorage.setItem("recipes", JSON.stringify(filteredData))
     toast.success("recipe Deleted!");
     navigate("/recipes");
   };
