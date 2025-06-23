@@ -1,11 +1,11 @@
-import axios from "axios";
+import axios from "../utils/Axios";
 import React from "react";
 
 const Home = () => {
   const getProducts = async () => {
     try {
-      const { data } = await axios.get("https://fakestoreapi.com/products/1");
-      console.log(data);
+      const { data } = await axios.get("/products");
+      // console.log(data);
     } catch (error) {
       console.log(error);
     }
