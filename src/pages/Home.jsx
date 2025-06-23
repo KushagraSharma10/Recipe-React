@@ -11,16 +11,9 @@ const Home = () => {
     }
   };
 
-  useEffect(()=>{
-    console.log("Home.jsx is mounted!")
+  useEffect(() => {
     getProducts();
-
-    return () =>{
-      console.log("Home.jsx is unmounted!")
-    }
-  })
-
-
+  }, []);
 
   return (
     <div>
