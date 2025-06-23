@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { recipeContext } from "../context/RecipeContext";
 import { useForm } from "react-hook-form";
@@ -37,22 +37,37 @@ const SingleRecipe = () => {
     navigate("/recipes");
   };
 
-  const favorite = JSON.parse(localStorage.getItem("fav")) || [];
+  const [favorite, setFavorite] = useState(
+    JSON.parse(localStorage.getItem("fav")) || []
+  );
 
   const favHandler = () => {
-    favorite.push(recipe)
-    localStorage.setItem("fav", JSON.stringify(favorite))
+    const copyFav = [...favorite];
+    copyFav.push(recipe);
+    localStorage.setItem("fav", JSON.stringify(copyFav));
   };
 
-  const unfavHandler = () => {};
+  const unfavHandler = () => {
+    const filteredFav = favorite.filter((f) => f.id !== recipe?.id);
+    setFavorite(filteredFav);
+    localStorage.setItem("fav", JSON.stringify(filteredFav));
+  };
+
+  useEffect(() => {}, [favorite]);
 
   return recipe ? (
     <div className="flex gap-5">
       <div className="relative left w-1/2 p-10">
-        {favorite.find(t=> t.id === recipe.id) ? (
-          <i onClick={unfavHandler} className="absolute right-[10%] ri-heart-fill text-4xl text-red-500"></i>
+        {favorite.find((t) => t.id === recipe.id) ? (
+          <i
+            onClick={unfavHandler}
+            className="absolute right-[10%] ri-heart-fill text-4xl text-red-500"
+          ></i>
         ) : (
-          <i onClick={favHandler} className="absolute right-[10%] ri-heart-line text-4xl text-red-500"></i>
+          <i
+            onClick={favHandler}
+            className="absolute right-[10%] ri-heart-line text-4xl text-red-500"
+          ></i>
         )}
 
         <h1 className="text-5xl font-bold ">{recipe.title}</h1>
