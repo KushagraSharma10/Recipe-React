@@ -16,7 +16,10 @@ const Create = () => {
     recipe.id = nanoid();
     console.log(recipe);
 
-    setData([...data, recipe]);
+    const copyData = [...data];
+    copyData.push(recipe)
+    setData(copyData)
+    localStorage.setItem("recipes", JSON.stringify(copyData))
     toast.success("New Recipe Created!")
     navigate("/recipes")
     reset();
@@ -67,7 +70,7 @@ const Create = () => {
       />
 
       <select
-        {...register("Category")}
+        {...register("category")}
         className="block border-b outline-0 p-2 text-zinc-500"
       >
         <option value="breakfast">Breakfast</option>
