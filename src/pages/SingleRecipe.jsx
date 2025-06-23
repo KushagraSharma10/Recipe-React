@@ -44,6 +44,7 @@ const SingleRecipe = () => {
   const favHandler = () => {
     const copyFav = [...favorite];
     copyFav.push(recipe);
+    setFavorite(copyFav);
     localStorage.setItem("fav", JSON.stringify(copyFav));
   };
 
