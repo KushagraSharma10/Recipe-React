@@ -2,9 +2,10 @@ import React, { useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { recipeContext } from "../context/RecipeContext";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 const SingleRecipe = () => {
-  const { data } = useContext(recipeContext);
+  const { data, setData } = useContext(recipeContext);
   const params = useParams();
 
   const { register, handleSubmit } = useForm();
@@ -13,8 +14,13 @@ const SingleRecipe = () => {
 
   const submitHandler = (recipe) =>{
     const index = data.findIndex((recipe) => params.id === recipe.id);
-    console.log(index)
+    const copyData = [...data];
+    copyData[index] = {...copyData[index] , ...recipe}
+    setData(copyData);
+    toast.success("Recipe Updated!")
+
   }
+  
 
   const recipe = data.find((recipe) => params.id === recipe.id);
 //   console.log(params);
@@ -30,7 +36,7 @@ const SingleRecipe = () => {
           className="w-full h-[30vh] object-cover"
         />
       </div>
-      <form className="w-1/2">
+      <form className="w-1/2" onSubmit={handleSubmit(submitHandler)}>
         <input
           type="url"
           {...register("image")}
@@ -88,8 +94,11 @@ const SingleRecipe = () => {
           <option value="dinner">Dinner</option>
         </select>
 
-        <button className="block mt-5 px-4 py-2 bg-zinc-900 rounded-md cursor-pointer">
-          Save Recipe
+        <button className="block mt-5 px-4 py-2 bg-blue-500 rounded-md cursor-pointer w-1/2">
+          Update Recipe
+        </button>
+        <button className="block mt-5 px-4 py-2 bg-red-500 rounded-md cursor-pointer w-1/2">
+          Delte Recipe
         </button>
       </form>
     </div>
