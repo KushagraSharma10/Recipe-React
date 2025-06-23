@@ -37,19 +37,22 @@ const SingleRecipe = () => {
     navigate("/recipes");
   };
 
-  const favHandler = () => {};
+  const favorite = JSON.parse(localStorage.getItem("fav")) || [];
+
+  const favHandler = () => {
+    favorite.push(recipe)
+    localStorage.setItem("fav", JSON.stringify(favorite))
+  };
 
   const unfavHandler = () => {};
-
-  const favorite = JSON.parse(localStorage.getItem("recipes"));
 
   return recipe ? (
     <div className="flex gap-5">
       <div className="relative left w-1/2 p-10">
-        {favorite.includes(recipe) ? (
-          <i className="absolute right-[10%] ri-heart-fill text-4xl text-red-500"></i>
+        {favorite.find(t=> t.id === recipe.id) ? (
+          <i onClick={unfavHandler} className="absolute right-[10%] ri-heart-fill text-4xl text-red-500"></i>
         ) : (
-          <i className="absolute right-[10%] ri-heart-line text-4xl text-red-500"></i>
+          <i onClick={favHandler} className="absolute right-[10%] ri-heart-line text-4xl text-red-500"></i>
         )}
 
         <h1 className="text-5xl font-bold ">{recipe.title}</h1>
