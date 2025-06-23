@@ -20,6 +20,13 @@ const SingleRecipe = () => {
     toast.success("Recipe Updated!")
 
   }
+
+  const deleteHandler = () =>{
+    const filteredData = data.filter((r) => r.id !== params.id);
+    setData(filteredData);
+    toast.success("recipe Deleted!")
+    navigate("/recipes");
+  }
   
 
   const recipe = data.find((recipe) => params.id === recipe.id);
@@ -97,8 +104,8 @@ const SingleRecipe = () => {
         <button className="block mt-5 px-4 py-2 bg-blue-500 rounded-md cursor-pointer w-1/2">
           Update Recipe
         </button>
-        <button className="block mt-5 px-4 py-2 bg-red-500 rounded-md cursor-pointer w-1/2">
-          Delte Recipe
+        <button onClick={deleteHandler} className="block mt-5 px-4 py-2 bg-red-500 rounded-md cursor-pointer w-1/2">
+          Delete Recipe
         </button>
       </form>
     </div>
