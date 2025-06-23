@@ -25,19 +25,17 @@ const SingleRecipe = () => {
     const copyData = [...data];
     copyData[index] = { ...copyData[index], ...recipe };
     setData(copyData);
-    localStorage.setItem("recipes", JSON.stringify(copyData))
+    localStorage.setItem("recipes", JSON.stringify(copyData));
     toast.success("Recipe Updated!");
   };
 
   const deleteHandler = () => {
     const filteredData = data.filter((r) => r.id !== params.id);
     setData(filteredData);
-    localStorage.setItem("recipes", JSON.stringify(filteredData))
+    localStorage.setItem("recipes", JSON.stringify(filteredData));
     toast.success("recipe Deleted!");
     navigate("/recipes");
   };
-  //   console.log(params);
-  //   console.log(data);
 
   return recipe ? (
     <div className="flex gap-5">
