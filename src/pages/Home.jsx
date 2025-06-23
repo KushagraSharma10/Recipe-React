@@ -1,15 +1,24 @@
 import axios from "../utils/Axios";
-import React from "react";
+import React, { useEffect } from "react";
 
 const Home = () => {
   const getProducts = async () => {
     try {
       const { data } = await axios.get("/products");
-      // console.log(data);
+      console.log(data);
     } catch (error) {
       console.log(error);
     }
   };
+
+  useEffect(()=>{
+    console.log("Home.jsx is mounted!")
+    getProducts();
+
+    return () =>{
+      console.log("Home.jsx is unmounted!")
+    }
+  })
 
 
 
